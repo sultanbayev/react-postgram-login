@@ -2,6 +2,8 @@ import React from "react";
 import { ProvideFirebase } from "./firebase/useFirebase";
 import { Router } from "@reach/router";
 import MainPage from "./posts/MainPage";
+import PasswordChange from './auth/PasswordChange';
+import ForgotPassword from './auth/ForgotPassword';
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import "./App.css";
@@ -14,6 +16,8 @@ function App() {
         <MainPage path="/" />
         <Login path="/login" />
         <Register path="/register" />
+        <PasswordChange path="/passwordChange" />
+        <ForgotPassword path="/forgot" />
       </Router>
     </ProvideFirebase>
   );

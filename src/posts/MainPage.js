@@ -38,6 +38,7 @@ function MainPage() {
   return (
     <MainLayout>
       <Button onClick={onLogoutClick}>Logout</Button>
+      <Link to="/passwordChange">Change password</Link>
     </MainLayout>
   );
 }

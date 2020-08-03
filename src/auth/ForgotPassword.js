@@ -12,20 +12,17 @@ const MainLayout = styled(Layout)`
   justify-content: center;
 `;
 
-const TextLayout = styled.div``;
-
-function Login() {
-  const { login } = useFirebase();
+function ForgotPassword() {
+  const { resetPassword } = useFirebase();
   const navigate = useNavigate();
 
-  const onFormFinish = async (values) => {
-    try {
-      await login(values.email, values.password);
-      message.success("Login is successful");
-      navigate("/");
-    } catch (error) {
-      message.error(error.message);
-    }
+  const onFormFinish = (values) => {
+    resetPassword(values.email).then(function() {
+        message.success("Password reset was sent to your email");
+        navigate('/login')
+      }).catch(function(error) {
+        message.error(error.message);
+      });
   };
 
   return (
@@ -46,32 +43,16 @@ function Login() {
           <Input />
         </Form.Item>
 
-        <Form.Item
-          label="Password"
-          name="password"
-          rules={[
-            {
-              required: true,
-              message: "Please input your password!",
-            },
-          ]}
-        >
-          <Input.Password />
-        </Form.Item>
-
         <Form.Item>
           <Button type="primary" htmlType="submit">
-            Login
+            Reset password
           </Button>
         </Form.Item>
       </Form>
 
-      <TextLayout>
-        Don't have login yet? Register <Link to="/register">here</Link>
-      </TextLayout>
-      <Link to="/forgot">Forgot password</Link>
+        <Link to="/login">Cancel</Link>
     </MainLayout>
   );
 }
 
-export default Login;
+export default ForgotPassword;

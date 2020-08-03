@@ -12,12 +12,12 @@ function useProvideFirebase() {
 
   React.useEffect(() => {
     if (!firebase.apps.length) {
-      console.log("I am initializing new firebase app");
+      // console.log("I am initializing new firebase app");
       firebase.initializeApp(config);
     }
 
     const unsubscribeFunction = firebase.auth().onAuthStateChanged((user) => {
-      console.log("got new user", user);
+      // console.log("got new user", user);
       setUser(user);
     });
 
@@ -39,11 +39,16 @@ function useProvideFirebase() {
     await firebase.auth().signOut();
   };
 
+  const resetPassword = async (email) => {
+    await firebase.auth().sendPasswordResetEmail(email);
+  };
+
   return {
     user,
     register,
     login,
     signout,
+    resetPassword
   };
 }
 
